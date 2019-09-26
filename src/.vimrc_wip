@@ -48,8 +48,6 @@ set softtabstop=0
 set shiftwidth=4
 set expandtab
 
-"" Map leader to ,
-let mapleader=','
 
 "" Enable hidden buffers
 set hidden
@@ -86,6 +84,9 @@ set laststatus=2
 "" Mappings
 "*****************************************************************************
 
+"" Map leader to ,
+let mapleader=','
+
 "" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -109,7 +110,7 @@ nnoremap <silent> <leader><space> :noh<cr>
 
 
 "*****************************************************************************
-"" my settings
+"" python  mappings
 "*****************************************************************************
 
 " ipython-shelll
@@ -128,6 +129,7 @@ autocmd filetype python vnoremap ,so y:call PyShellSendKey(substitute('<C-R>0',"
 " on data frames
 autocmd filetype python nnoremap ,sdh :call PyShellSendKey("<C-R><C-W>.head()\r")<CR><Esc>
 autocmd filetype python nnoremap ,sdc :call PyShellSendKey("<C-R><C-W>.columns\r")<CR><Esc>
+autocmd filetype python nnoremap ,sdi :call PyShellSendKey("<C-R><C-W>.info()\r")<CR><Esc>
 
 
 
