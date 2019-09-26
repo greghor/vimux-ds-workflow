@@ -86,18 +86,20 @@ set laststatus=2
 "" Map leader to ,
 let mapleader=','
 
-" vim cell-mode
+" vim cell-mode parameters
 let g:cellmode_use_tmux=1
 let g:cellmode_tmux_panenumber=1
-noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
 
-" ipython-shelll
+" ipython-shell
 noremap ,ss :call StartPyShell()<CR>
 noremap ,sk :call StopPyShell()<CR>
 
+" code execution
 nnoremap ,l  :call PyShellSendLine()<CR>
 noremap <silent> <C-b> :call RunTmuxPythonCell(0)<CR>
+noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
 
+" code inspection
 nnoremap ,sl :call PyShellSendKey("len(<C-R><C-W>)\r")<CR><Esc>
 nnoremap ,sc :call PyShellSendKey("<C-R><C-W>.count()\r")<CR><Esc>
 nnoremap ,so :call PyShellSendKey("<C-R><C-W>\r")<CR><Esc>
