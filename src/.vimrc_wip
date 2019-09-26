@@ -7,26 +7,12 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-let vimplug_exists=expand('~/./autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "python,scala"
+let g:vim_bootstrap_langs = "python"
 let g:vim_bootstrap_editor = ""				" nvim or vim
 
-if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent !\curl -fLo ~/./autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  let g:not_finish_vimplug = "yes"
-
-  autocmd VimEnter * PlugInstall
-endif
-
 " Required:
-call plug#begin(expand('~/./plugged'))
+call plug#begin()
 
 "*****************************************************************************
 "" Plug install packages
@@ -34,13 +20,6 @@ call plug#begin(expand('~/./plugged'))
 Plug 'benmills/vimux'
 Plug 'greghor/vim-pyShell'
 Plug 'julienr/vim-cellmode'
-
-"" Color
-" Plug 'tomasr/molokai'
-"set t_Co=256
-"set background=dark
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=1
 
 call plug#end()
 
@@ -135,7 +114,7 @@ nnoremap <silent> <leader><space> :noh<cr>
 
 " ipython-shelll
 autocmd filetype python noremap ,ss :call StartPyShell()<CR>
-autocmd filetype python noremap ,sk :call StopPyShell("exit")<CR>
+autocmd filetype python noremap ,sk :call StopPyShell()<CR>
 
 autocmd filetype python nnoremap ,l  :call PyShellSendLine()<CR>
 
