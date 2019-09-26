@@ -4,9 +4,8 @@ filetype plugin on
 "" Vim-PLug core
 "*****************************************************************************
 if has('vim_starting')
-  set nocompatible               " Be iMproved
+    set nocompatible               " Be iMproved
 endif
-
 
 let g:vim_bootstrap_langs = "python"
 let g:vim_bootstrap_editor = ""				" nvim or vim
@@ -87,56 +86,30 @@ set laststatus=2
 "" Map leader to ,
 let mapleader=','
 
-"" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-"" Opens a tab edit command with the path of the currently edited file filled
-noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
-
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-
-"" Buffer nav
-noremap <leader>z :bp<CR>
-noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>w :bn<CR>
-
-"" Close buffer
-noremap <leader>c :bd<CR>
-
-"" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
-
-
-"*****************************************************************************
-"" python  mappings
-"*****************************************************************************
-
-" ipython-shelll
-autocmd filetype python noremap ,ss :call StartPyShell()<CR>
-autocmd filetype python noremap ,sk :call StopPyShell()<CR>
-
-autocmd filetype python nnoremap ,l  :call PyShellSendLine()<CR>
-
-autocmd filetype python nnoremap ,sl :call PyShellSendKey("len(<C-R><C-W>)\r")<CR><Esc>
-
-autocmd filetype python nnoremap ,sc :call PyShellSendKey("<C-R><C-W>.count()\r")<CR><Esc>
-autocmd filetype python nnoremap ,so :call PyShellSendKey("<C-R><C-W>\r")<CR><Esc>
-
-autocmd filetype python vnoremap ,so y:call PyShellSendKey(substitute('<C-R>0',"\"","\\\"","")."\r")<CR> 
-
-" on data frames
-autocmd filetype python nnoremap ,sdh :call PyShellSendKey("<C-R><C-W>.head()\r")<CR><Esc>
-autocmd filetype python nnoremap ,sdc :call PyShellSendKey("<C-R><C-W>.columns\r")<CR><Esc>
-autocmd filetype python nnoremap ,sdi :call PyShellSendKey("<C-R><C-W>.info()\r")<CR><Esc>
-
-
-
 " vim cell-mode
 let g:cellmode_use_tmux=1
 let g:cellmode_tmux_panenumber=1
-noremap <silent> <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
+noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
+
+" ipython-shelll
+noremap ,ss :call StartPyShell()<CR>
+noremap ,sk :call StopPyShell()<CR>
+
+nnoremap ,l  :call PyShellSendLine()<CR>
+noremap <silent> <C-b> :call RunTmuxPythonCell(0)<CR>
+
+nnoremap ,sl :call PyShellSendKey("len(<C-R><C-W>)\r")<CR><Esc>
+nnoremap ,sc :call PyShellSendKey("<C-R><C-W>.count()\r")<CR><Esc>
+nnoremap ,so :call PyShellSendKey("<C-R><C-W>\r")<CR><Esc>
+vnoremap ,so y:call PyShellSendKey(substitute('<C-R>0',"\"","\\\"","")."\r")<CR> 
+
+" on data frames
+nnoremap ,sdh :call PyShellSendKey("<C-R><C-W>.head()\r")<CR><Esc>
+nnoremap ,sdc :call PyShellSendKey("<C-R><C-W>.columns\r")<CR><Esc>
+nnoremap ,sdi :call PyShellSendKey("<C-R><C-W>.info()\r")<CR><Esc>
+
+
+
 
 " Comment block of code
 map <leader>a :call Comment()<CR>

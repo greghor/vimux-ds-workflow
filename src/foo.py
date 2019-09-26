@@ -3,21 +3,21 @@
 import pandas as pd
 from sklearn import datasets
 import matplotlib.pyplot as plt
+import pdb
 ##}
 
-#bad, bad, bad practice to store data on github
-data_dir = "https://github.com/greghor/vimux-ds-workflow/tree/master/data/"
+data_dir = "https://raw.githubusercontent.com/greghor/vimux-ds-workflow/master/data/"
+
+##{ storing data on github is a bad, bad, bad practice.
+clients = pd.read_csv(data_dir + "clients.csv", sep=";")
+contracts = pd.read_csv(data_dir + "contracts.csv", sep=";")
+##}
 
 ##{
-clients = pd.read_csv(data_dir + "clients.csv")
-iris = datasets.load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
-df["target"] = iris.target
+try:
+    business_contract_rate = contracts["is_b2b"].mean()
+except:
+    pdb.set_trace()
 ##}
-
-
-df[["sepal length (cm)", "petal length (cm)"]].hist()
-
-
 
 
