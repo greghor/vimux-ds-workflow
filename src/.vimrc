@@ -24,6 +24,42 @@ call plug#end()
 
 " Required:
 filetype plugin indent on
+"
+
+"*****************************************************************************
+"" Mappings
+"*****************************************************************************
+
+" vim cell-mode parameters
+let g:cellmode_use_tmux=1
+let g:cellmode_tmux_panenumber=1
+
+" ipython-shell
+noremap ,ss :call StartPyShell()<CR>
+noremap ,sk :call StopPyShell()<CR>
+
+" code execution
+nnoremap ,l  :call PyShellSendLine()<CR>
+noremap <silent> <C-b> :call RunTmuxPythonCell(0)<CR>
+noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
+
+" code inspection
+nnoremap ,sl :call PyShellSendKey("len(<C-R><C-W>)\r")<CR><Esc>
+nnoremap ,sc :call PyShellSendKey("<C-R><C-W>.count()\r")<CR><Esc>
+nnoremap ,so :call PyShellSendKey("<C-R><C-W>\r")<CR><Esc>
+vnoremap ,so y:call PyShellSendKey(substitute('<C-R>0',"\"","\\\"","")."\r")<CR> 
+
+" on data frames
+nnoremap ,sdh :call PyShellSendKey("<C-R><C-W>.head()\r")<CR><Esc>
+nnoremap ,sdc :call PyShellSendKey("<C-R><C-W>.columns\r")<CR><Esc>
+nnoremap ,sdi :call PyShellSendKey("<C-R><C-W>.info()\r")<CR><Esc>
+nnoremap ,sdd :call PyShellSendKey("<C-R><C-W>.describe()\r")<CR><Esc>
+nnoremap ,sdt :call PyShellSendKey("<C-R><C-W>.dtypes\r")<CR><Esc>
+
+" plot
+nnoremap ,spp :call PyShellSendKey("<C-R><C-W>.plot()\r")<CR><Esc>
+nnoremap ,sph :call PyShellSendKey("<C-R><C-W>.hist()\r")<CR><Esc>
+nnoremap ,spc :call PyShellSendKey("plt.close('all')\r")<CR><Esc>
 
 
 "*****************************************************************************
@@ -78,70 +114,5 @@ endif
 "" Status bar
 set laststatus=2
 
-
-"*****************************************************************************
-"" Mappings
-"*****************************************************************************
-
-"" Map leader to ,
-let mapleader=','
-
-" vim cell-mode parameters
-let g:cellmode_use_tmux=1
-let g:cellmode_tmux_panenumber=1
-
-" ipython-shell
-noremap ,ss :call StartPyShell()<CR>
-noremap ,sk :call StopPyShell()<CR>
-
-" code execution
-nnoremap ,l  :call PyShellSendLine()<CR>
-noremap <silent> <C-b> :call RunTmuxPythonCell(0)<CR>
-noremap <C-a> :call RunTmuxPythonAllCellsAbove()<CR>
-
-" code inspection
-nnoremap ,sl :call PyShellSendKey("len(<C-R><C-W>)\r")<CR><Esc>
-nnoremap ,sc :call PyShellSendKey("<C-R><C-W>.count()\r")<CR><Esc>
-nnoremap ,so :call PyShellSendKey("<C-R><C-W>\r")<CR><Esc>
-vnoremap ,so y:call PyShellSendKey(substitute('<C-R>0',"\"","\\\"","")."\r")<CR> 
-
-" on data frames
-nnoremap ,sdh :call PyShellSendKey("<C-R><C-W>.head()\r")<CR><Esc>
-nnoremap ,sdc :call PyShellSendKey("<C-R><C-W>.columns\r")<CR><Esc>
-nnoremap ,sdi :call PyShellSendKey("<C-R><C-W>.info()\r")<CR><Esc>
-
-" plot
-nnoremap ,spp :call PyShellSendKey("<C-R><C-W>.plot()\r")<CR><Esc>
-nnoremap ,sph :call PyShellSendKey("<C-R><C-W>.hist()\r")<CR><Esc>
-nnoremap ,spc :call PyShellSendKey("plt.close('all')\r")<CR><Esc>
-
-
-
-" Comment block of code
-map <leader>a :call Comment()<CR>
-map <leader>b :call Uncomment()<CR>
-
-" comment a block of code sh, rb,php,js,scala,py
-function! Comment()
-  let ext = tolower(expand('%:e'))
-  if ext == 'php' || ext == 'rb' || ext == 'sh' || ext == 'py'
-    silent s/^/\#/
-  elseif ext == 'js' || ext == 'scala'
-    silent s:^:\/\/:g
-  elseif ext == 'vim'
-    silent s:^:\":g
-  endif
-endfunction
-
-function! Uncomment()
-  let ext = tolower(expand('%:e'))
-  if ext == 'php' || ext == 'rb' || ext == 'sh' || ext == 'py'
-    silent s/^\#//
-  elseif ext == 'js' || ext == 'scala'
-    silent s:^\/\/::g
-  elseif ext == 'vim'
-    silent s:^\"::g
-  endif
-endfunction
 
 

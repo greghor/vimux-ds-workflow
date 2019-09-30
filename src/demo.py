@@ -3,7 +3,7 @@
 import pandas as pd
 from sklearn import datasets
 import matplotlib.pyplot as plt
-import pdb
+%matplotlib qt
 ##}
 
 
@@ -13,8 +13,9 @@ df = pd.DataFrame(iris.data, columns=iris.feature_names)
 ##}
 
 df["target"] = iris.target
+categories = df["target"].unique()
 
-df["sepal ratio"] = df["sepal length(cm)"]/df["sepal width (cm)"]
+df["sepal ratio"] = df["sepal length (cm)"]/df["sepal width (cm)"]
 
 
 
