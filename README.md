@@ -1,4 +1,4 @@
-This is the companion repo for this post.
+This is the companion repo for this [post](https://medium.com/@greghor/boosting-your-data-science-workflow-with-vim-tmux-14505c5e016e).
 
 `src/.vimrc` contains the basic set-up to fly the ipython repl directly from vim
 
